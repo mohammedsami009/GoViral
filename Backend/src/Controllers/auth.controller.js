@@ -124,8 +124,9 @@ async function registerPromoter(req, res) {
       newFollowersGained,
       accountsReached,
       niche,
+      price: 0, // ensure price is set to 0 on registration
     });
-
+    
     const token = jwt.sign({ id: promoter._id }, process.env.JWT_SECRET);
     res.cookie("token", token, { httpOnly: true });
 
@@ -136,6 +137,7 @@ async function registerPromoter(req, res) {
         fullName: promoter.fullName,
         email: promoter.email,
         instagramHandle: promoter.instagramHandle,
+        price: promoter.price, // include price in response
       }
     });
 
